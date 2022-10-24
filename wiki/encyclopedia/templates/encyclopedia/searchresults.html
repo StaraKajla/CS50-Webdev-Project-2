@@ -1,12 +1,12 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    Encyclopedia
+    Search results
 {% endblock %}
 
 {% block body %}
-    <h1>All Pages</h1>
-
+    <h1>"{{ searchParam }}" has not been created yet.</h1>
+    <h6>Did you mean:</h6>
     <ul>
         {% for entry in entries %}
             <li><a href="/wiki/{{ entry }}">{{ entry }}</a></li>
