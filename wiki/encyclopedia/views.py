@@ -67,7 +67,6 @@ def save(request):
         "title": title.capitalize()
     })
 
-# TODO
 def edit(request, name):
 
     currentContent = util.get_entry(name)
