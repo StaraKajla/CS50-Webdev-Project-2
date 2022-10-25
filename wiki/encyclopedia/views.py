@@ -1,6 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 import random
-
 
 from . import util
 
@@ -22,7 +21,7 @@ def title(request, name):
             "missingPage": name
         })
         
-    return render(request, f"encyclopedia/titleSearch.html", {
+    return render(request, "encyclopedia/titleSearch.html", {
         "entry": util.get_entry(name),
         "title": name.capitalize()
     })
@@ -69,8 +68,25 @@ def save(request):
     })
 
 # TODO
-def edit(request):
-    return render(request, "encyclopedia/index.html")
+def edit(request, name):
+
+    currentContent = util.get_entry(name)
+
+    if request.method == "POST":
+        title = name
+        content = request.POST.get("content")
+
+        util.save_entry(title, content)
+
+        return redirect(f"/wiki/{title}", {
+            "title": name,
+            "entry": currentContent            
+        })
+
+    return render(request, "encyclopedia/edit.html", {
+        "editTitle": name,
+        "currentContent": currentContent
+    })
 
 def randomSite(request):
     entries = util.list_entries()

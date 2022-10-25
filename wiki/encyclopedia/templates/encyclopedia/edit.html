@@ -1,0 +1,25 @@
+{% extends "encyclopedia/layout.html" %}
+{% load markdownify %}
+
+{% block title %}
+    Edit page
+{% endblock %}
+
+{% block body %}
+
+    <h1>Current {{ editTitle }} content</h1>
+    <div>{{ currentContent |markdownify }}</div>
+    <form action="/edit/{{ editTitle }}" method="post">
+        {% csrf_token %}
+        <div>
+            <h6 class="mt-5">Edit content:</h6>
+        </div>
+        <div>
+            <input type="text" name="content" placeholder="Content">
+        </div>
+        <div class="mt-1">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+
+{% endblock %}
