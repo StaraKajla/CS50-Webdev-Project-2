@@ -8,14 +8,13 @@
 {% block body %}
 
     <h1>Current {{ editTitle }} content</h1>
-    <div>{{ currentContent |markdownify }}</div>
     <form action="/edit/{{ editTitle }}" method="post">
         {% csrf_token %}
         <div>
             <h6 class="mt-5">Edit content:</h6>
         </div>
         <div>
-            <input type="text" name="content" placeholder="Content">
+            <input type="text" name="content" value="{{ currentContent }}" style="height:100px; width:400px;">
         </div>
         <div class="mt-1">
             <input type="submit" value="Submit">
